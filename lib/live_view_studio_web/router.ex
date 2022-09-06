@@ -4,6 +4,7 @@ defmodule LiveViewStudioWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
+    plug :fetch_flash
     plug :fetch_live_flash
     plug :put_root_layout, {LiveViewStudioWeb.LayoutView, :root}
     plug :protect_from_forgery
@@ -18,6 +19,8 @@ defmodule LiveViewStudioWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    live "/light", LightLive
   end
 
   # Other scopes may use custom stacks.
