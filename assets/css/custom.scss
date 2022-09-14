@@ -147,7 +147,7 @@ body {
     @apply max-w-3xl mx-auto text-center;
   
     form {
-      @apply inline-flex items-center;
+      @apply inline-flex;
   
       input[type="text"] {
         @apply h-10 border border-cool-gray-400 rounded-l-md bg-white px-5 text-base;
