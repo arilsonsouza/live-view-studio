@@ -27,7 +27,7 @@ defmodule LiveViewStudio.Boats do
     Enum.reduce(criteria, query, fn
       {:type, ""}, query -> query
       {:type, type}, query -> from(q in query, where: q.type == ^type)
-      {:prices, [""]}, query -> query
+      {:prices, []}, query -> query
       {:prices, prices}, query -> from(q in query, where: q.price in ^prices)
     end)
     |> Repo.all()
