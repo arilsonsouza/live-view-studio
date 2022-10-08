@@ -11,6 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 alias LiveViewStudio.Repo
 alias LiveViewStudio.Boats.Boat
+alias LiveViewStudio.Servers.Server
 
 %Boat{
   model: "1760 Retriever Jon Deluxe",
