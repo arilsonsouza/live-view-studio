@@ -51,7 +51,8 @@ defmodule LiveViewStudio.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:dart_sass, "~> 0.5", runtime: Mix.env() == :dev},
-      {:number, "~> 1.0.1"}
+      {:number, "~> 1.0.1"},
+      {:faker, "~> 0.17", runtime: Mix.env() == :dev}
     ]
   end
 
