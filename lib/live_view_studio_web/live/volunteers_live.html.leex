@@ -2,21 +2,7 @@
   title: "Volunteer Check-In",
   subtitle: @recent_activity %>
 <div id="checkin">
-
-  <%= f = form_for @changeset, "#",
-          phx_submit: "save",
-          phx_change: "validate" %>
-    <div class="field">
-      <%= text_input f, :name, placeholder: "Name", autocomplete: "off", phx_debounce: "2000" %>
-      <%= error_tag f, :name %>
-    </div>
-    <div class="field">
-      <%= telephone_input f, :phone, placeholder: "Phone", autocomplete: "off", phx_debounce: "blur" %>
-      <%= error_tag f, :phone %>
-    </div>
-
-    <%= submit "Check In", phx_disable_with: "Saving..." %>
-  </form>
+  <%= live_component VolunteerFormComponent, id: :new %>
 
   <div id="volunteers" phx-update="prepend">
     <%= for volunteer <- @volunteers do %>
