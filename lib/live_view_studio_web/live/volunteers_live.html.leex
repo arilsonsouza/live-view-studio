@@ -20,23 +20,7 @@
 
   <div id="volunteers" phx-update="prepend">
     <%= for volunteer <- @volunteers do %>
-      <div class="volunteer <%= if volunteer.checked_out, do: "out" %>"
-      id="<%= volunteer.id %>">
-        <div class="name">
-          <%= volunteer.name %>
-        </div>
-        <div class="phone">
-          <img src="images/phone.svg">
-          <%= volunteer.phone %>
-        </div>
-        <div class="status">
-          <button phx-click="toggle-status"
-                  phx-value-id="<%= volunteer.id %>"
-                  phx-disable-with="Saving...">
-            <%= if volunteer.checked_out, do: "Check In", else: "Check Out" %>
-          </button>
-        </div>
-      </div>
+    <%= live_component VolunteerComponent, id: volunteer.id ,volunteer: volunteer %>
     <% end %>
   </div>
 </div>

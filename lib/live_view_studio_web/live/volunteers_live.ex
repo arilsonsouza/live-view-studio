@@ -3,7 +3,7 @@ defmodule LiveViewStudioWeb.VolunteersLive do
 
   alias LiveViewStudio.Volunteers
   alias LiveViewStudio.Volunteers.Volunteer
-  alias LiveViewStudioWeb.HeaderComponent
+  alias LiveViewStudioWeb.{HeaderComponent, VolunteerComponent}
 
   def mount(_params, _session, socket) do
     if connected?(socket), do: Volunteers.subscribe()
@@ -37,15 +37,6 @@ defmodule LiveViewStudioWeb.VolunteersLive do
       |> Map.put(:action, :insert)
 
     socket = assign(socket, changeset: changeset)
-    {:noreply, socket}
-  end
-
-  def handle_event("toggle-status", %{"id" => id}, socket) do
-    volunteer = Volunteers.get_volunteer!(id)
-
-    {:ok, _volunteer} =
-      Volunteers.update_volunteer(volunteer, %{checked_out: !volunteer.checked_out})
-
     {:noreply, socket}
   end
 
