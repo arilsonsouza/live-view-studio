@@ -17,7 +17,7 @@ defmodule LiveViewStudioWeb.LicenseLive do
       <div id="license">
         <div class="card">
           <div class="content">
-            <div class="seats">
+            <div id="seats" class="seats">
               <img src="images/license.svg"/>
               <span>
                 Your license is currently for
@@ -25,7 +25,7 @@ defmodule LiveViewStudioWeb.LicenseLive do
               </span>
             </div>
 
-            <form phx-change="update">
+            <form id="update-seats" phx-change="update">
               <input
                 type="range"
                 min="1"
@@ -35,7 +35,7 @@ defmodule LiveViewStudioWeb.LicenseLive do
               />
             </form>
 
-            <div class="amount">
+            <div id="amount" class="amount">
               <%= number_to_currency(@amount) %>
             </div>
           </div>
