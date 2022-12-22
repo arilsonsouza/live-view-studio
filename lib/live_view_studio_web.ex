@@ -47,6 +47,7 @@ defmodule LiveViewStudioWeb do
       use Phoenix.LiveView,
         layout: {LiveViewStudioWeb.LayoutView, "live.html"}
 
+      import LiveViewStudioWeb.LiveHelpers
       unquote(view_helpers())
     end
   end
