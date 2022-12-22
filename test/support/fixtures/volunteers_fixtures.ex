@@ -12,8 +12,8 @@ defmodule LiveViewStudio.VolunteersFixtures do
       attrs
       |> Enum.into(%{
         checked_out: true,
-        name: "some name",
-        phone: "some phone"
+        name: "New Volunteer",
+        phone: "303-555-1212"
       })
       |> LiveViewStudio.Volunteers.create_volunteer()
 

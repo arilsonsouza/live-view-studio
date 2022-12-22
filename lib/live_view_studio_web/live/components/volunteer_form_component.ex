@@ -15,6 +15,7 @@ defmodule LiveViewStudioWeb.VolunteerFormComponent do
           phx_submit="save",
           phx_change="validate"
           phx_target={@myself}
+          id="create-volunteer"
         >
         <div class="field">
         <%= text_input f, :name, placeholder: "Name", autocomplete: "off", phx_debounce: "2000" %>
