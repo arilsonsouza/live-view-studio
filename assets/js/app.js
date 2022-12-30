@@ -1,6 +1,6 @@
 // We import the CSS which is extracted to its own file by esbuild.
 // Remove this line if you add a your own CSS build pipeline (e.g postcss).
-// 
+//
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
 // import "./user_socket.js"
@@ -25,31 +25,7 @@ import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
 
-let Hooks = {};
-
-Hooks.InfiniteScroll = {
-  mounted() {
-    console.log("Footer added to DOM!", this.el);
-    this.observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (entry.isIntersecting) {
-        console.log("Footer is visible");
-        this.pushEvent("load-more");
-      }
-    });
-
-    this.observer.observe(this.el);
-  },
-
-  updated() {
-    const pageNumber = this.el.dataset.pageNumber;
-    console.log("updated", pageNumber);
-  },
-
-  destroyed() {
-    this.observer.disconnect();
-  },
-};
+import Hooks from "./hooks";
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
