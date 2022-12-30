@@ -1036,3 +1036,19 @@ form[action="/users/settings"] {
     }
   }
 }
+
+/* Charting */
+
+#charting {
+  button {
+    @apply mt-6 bg-indigo-500 text-white font-medium px-4 rounded outline-none;
+  }
+
+  button:hover {
+    @apply bg-indigo-700;
+  }
+
+  button:active {
+    @apply bg-indigo-500;
+  }
+}
