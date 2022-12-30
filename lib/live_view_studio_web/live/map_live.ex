@@ -29,7 +29,11 @@ defmodule LiveViewStudioWeb.MapLive do
         <% end %>
       </div>
       <div class="main">
-        <div id="map"></div>
+        <div
+          id="map"
+          phx-hook="IncidentMap"
+          data-incidents="<%= Jason.encode!(@incidents)%>"
+          ></div>
       </div>
     </div>
     """

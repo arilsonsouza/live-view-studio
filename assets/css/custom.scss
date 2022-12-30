@@ -1076,10 +1076,14 @@ form[action="/users/settings"] {
   }
 
   .main {
-    @apply w-2/3 ml-6;
+    @apply w-full ml-6;
 
     #map {
       height: 650px;
+      width:100%;
+      position: absolute;
+      top:0;
+      bottom:0;
     }
 
     .leaflet-popup-content-wrapper .leaflet-popup-content {

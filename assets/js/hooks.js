@@ -1,4 +1,5 @@
 import LineChart from "./line-chart";
+import IncidentMap from "./incident-map";
 
 let Hooks = {};
 
@@ -33,6 +34,17 @@ Hooks.LineChart = {
 
     this.handleEvent("new-point", ({ label, value }) => {
       this.chart.addPoint(label, value);
+    });
+  },
+};
+
+Hooks.IncidentMap = {
+  mounted() {
+    this.map = new IncidentMap(this.el, [39.74, -104.99], (event) => {});
+
+    const incidents = JSON.parse(this.el.dataset.incidents);
+    incidents.forEach((incident) => {
+      this.map.addMarker(incident);
     });
   },
 };
