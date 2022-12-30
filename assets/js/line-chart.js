@@ -16,14 +16,14 @@ class LineChart {
       },
       options: {
         scales: {
-          xAxes: {
+          x: {
             ticks: {
               font: {
                 weight: "bold",
                 size: 14,
               },
             },
-            yAxes: {
+            y: {
               ticks: {
                 suggestedMin: 50,
                 suggestedMax: 200,
