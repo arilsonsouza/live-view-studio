@@ -40,7 +40,10 @@ Hooks.LineChart = {
 
 Hooks.IncidentMap = {
   mounted() {
-    this.map = new IncidentMap(this.el, [39.74, -104.99], (event) => {});
+    this.map = new IncidentMap(this.el, [39.74, -104.99], (event) => {
+      const incidentId = event.target.options.incidentId;
+      this.pushEvent("marker-clicked", incidentId);
+    });
 
     const incidents = JSON.parse(this.el.dataset.incidents);
     incidents.forEach((incident) => {
@@ -48,6 +51,11 @@ Hooks.IncidentMap = {
     });
 
     this.handleEvent("highlight-marker", (incident) => {
+      this.map.highlightMarker(incident);
+    });
+
+    this.handleEvent("add-marker", (incident) => {
+      this.map.addMarker(incident);
       this.map.highlightMarker(incident);
     });
   },

@@ -1076,14 +1076,11 @@ form[action="/users/settings"] {
   }
 
   .main {
-    @apply w-full ml-6;
+    @apply w-full ml-6 flex flex-col;
 
     #map {
       height: 650px;
       width:100%;
-      position: absolute;
-      top:0;
-      bottom:0;
     }
 
     .leaflet-popup-content-wrapper .leaflet-popup-content {
@@ -1091,7 +1088,7 @@ form[action="/users/settings"] {
     }
 
     button {
-      @apply mt-6 bg-indigo-500 text-white font-medium py-2 px-4 rounded outline-none;
+      @apply mt-6 bg-indigo-500 text-white font-medium px-4 rounded outline-none;
     }
 
     button:hover {

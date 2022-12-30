@@ -4,6 +4,8 @@ defmodule LiveViewStudioWeb.MapLive do
   alias LiveViewStudio.Incidents
 
   def mount(_params, _session, socket) do
+    if connected?(socket), do: Incidents.subscribe()
+
     socket =
       assign(socket,
         incidents: Incidents.list_incidents(),
@@ -29,14 +31,18 @@ defmodule LiveViewStudioWeb.MapLive do
         <% end %>
       </div>
       <div class="main">
-        <div id="wrapper" phx-update="ignore">
+        <div id="wrapper" class="w-full" phx-update="ignore">
           <div
             id="map"
             phx-hook="IncidentMap"
             data-incidents="<%= Jason.encode!(@incidents)%>"
             ></div>
-          </div>
-      </div>
+        </div>
+        <div class="text-center">
+          <button phx-click="report-incident">
+            Report Incident
+          </button>
+        </div>
     </div>
     """
   end
@@ -48,6 +54,26 @@ defmodule LiveViewStudioWeb.MapLive do
       socket
       |> assign(selected_incident: incident)
       |> push_event("highlight-marker", incident)
+
+    {:noreply, socket}
+  end
+
+  def handle_event("report-incident", _params, socket) do
+    Incidents.create_random_incident()
+    {:noreply, socket}
+  end
+
+  def handle_event("marker-clicked", incident_id, socket) do
+    incident = find_incident(socket, incident_id)
+    {:noreply, assign(socket, selected_incident: incident)}
+  end
+
+  def handle_info({:incident_created, incident}, socket) do
+    socket =
+      socket
+      |> update(:incidents, fn incidents -> [incident | incidents] end)
+      |> assign(selected_incident: incident)
+      |> push_event("add-marker", incident)
 
     {:noreply, socket}
   end
