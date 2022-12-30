@@ -29,11 +29,13 @@ defmodule LiveViewStudioWeb.MapLive do
         <% end %>
       </div>
       <div class="main">
-        <div
-          id="map"
-          phx-hook="IncidentMap"
-          data-incidents="<%= Jason.encode!(@incidents)%>"
-          ></div>
+        <div id="wrapper" phx-update="ignore">
+          <div
+            id="map"
+            phx-hook="IncidentMap"
+            data-incidents="<%= Jason.encode!(@incidents)%>"
+            ></div>
+          </div>
       </div>
     </div>
     """
@@ -41,7 +43,12 @@ defmodule LiveViewStudioWeb.MapLive do
 
   def handle_event("select-incident", %{"id" => id}, socket) do
     incident = find_incident(socket, id)
-    socket = assign(socket, selected_incident: incident)
+
+    socket =
+      socket
+      |> assign(selected_incident: incident)
+      |> push_event("highlight-marker", incident)
+
     {:noreply, socket}
   end
 
