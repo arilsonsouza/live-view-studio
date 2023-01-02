@@ -1227,3 +1227,32 @@ form[action="/users/settings"] {
     }
   }
 }
+
+/* Modal */
+
+#underwater {
+  @apply max-w-xl mx-auto text-center;
+
+  a.button,
+  button {
+    @apply inline-block text-base bg-indigo-500 text-white font-medium px-4 rounded outline-none;
+  }
+
+  a.button:hover,
+  button:hover {
+    @apply bg-indigo-700;
+  }
+
+  a.button:focus,
+  button:focus {
+    @apply outline-none border-indigo-700 ring ring-indigo-300;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  .creatures {
+    @apply text-center my-6 text-4xl;
+  }
+}
