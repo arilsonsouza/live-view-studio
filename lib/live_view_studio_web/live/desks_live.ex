@@ -17,6 +17,7 @@ defmodule LiveViewStudioWeb.DesksLive do
         accept: ~w(.png .jpeg .jpg),
         max_entries: 3,
         max_file_size: 4_000_000
+        # external: &generate_metadata/2
       )
 
     {:ok, socket, temporary_assigns: [desks: []]}
@@ -27,6 +28,7 @@ defmodule LiveViewStudioWeb.DesksLive do
 
     urls =
       for entry <- completed do
+        # Path.join(s3_url(), filename(entry))
         Routes.static_path(socket, "/uploads/#{filename(entry)}")
       end
 
@@ -63,8 +65,6 @@ defmodule LiveViewStudioWeb.DesksLive do
     consume_uploaded_entries(socket, :photo, fn meta, entry ->
       dest = Path.join("priv/static/uploads", filename(entry))
       File.cp!(meta.path, dest)
-
-      Routes.static_path(socket, "/uploads/#{filename(entry)}")
     end)
 
     {:ok, desk}
@@ -74,4 +74,33 @@ defmodule LiveViewStudioWeb.DesksLive do
     [ext | _] = MIME.extensions(entry.client_type)
     "#{entry.uuid}.#{ext}"
   end
+
+  # @s3_bucket "liveview-uploads"
+
+  # defp s3_url, do: "//#{@s3_bucket}.s3.amazonaws.com"
+
+  # defp generate_metadata(entry, socket) do
+  #   config = %{
+  #     region: "us-east-1",
+  #     access_key_id: System.get_env("AWS_ACCESS_KEY_ID", "test"),
+  #     secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY", "test")
+  #   }
+
+  #   {:ok, fields} =
+  #     SimpleS3Upload.sign_form_upload(config, @s3_bucket,
+  #       key: filename(entry),
+  #       content_type: entry.client_type,
+  #       max_file_size: socket.assigns.uploads.photo.max_file_size,
+  #       expires_in: :timer.hours(1)
+  #     )
+
+  #   metadata = %{
+  #     uploader: "S3",
+  #     key: filename(entry),
+  #     url: s3_url(),
+  #     fields: fields
+  #   }
+
+  #   {:ok, metadata, socket}
+  # end
 end
