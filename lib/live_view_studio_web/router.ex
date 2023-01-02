@@ -37,6 +37,7 @@ defmodule LiveViewStudioWeb.Router do
     live "/sandbox", SandBoxLive
     live "/chart", ChartLive
     live "/map", MapLive
+    live "/key-events", KeyEventsLive
   end
 
   # Other scopes may use custom stacks.
