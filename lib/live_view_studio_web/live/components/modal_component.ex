@@ -4,18 +4,23 @@ defmodule LiveViewStudioWeb.ModalComponent do
   def render(assigns) do
     ~H"""
     <div class="phx-modal"
-        phx-window-keydown="toggle-modal"
+        phx-window-keydown="close"
         phx-key="escape"
-        phx-capture-click="toggle-modal">
+        phx-capture-click="close"
+        phx-target={@myself}>
       <div class="phx-modal-content">
 
-        <a href="#" phx-click="toggle-modal" class="phx-modal-close">
-          &times;
-        </a>
+       <%= live_patch raw("&times;"),
+           to: @return_to,
+           class: "phx-modal-close" %>
 
-        <%= live_component @component %>
+        <%= live_component @component, @opts %>
       </div>
     </div>
     """
+  end
+
+  def handle_event("close", _, socket) do
+    {:noreply, push_patch(socket, to: socket.assigns.return_to)}
   end
 end

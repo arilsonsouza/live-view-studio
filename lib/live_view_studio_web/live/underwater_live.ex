@@ -1,28 +1,31 @@
 defmodule LiveViewStudioWeb.UnderwaterLive do
   use LiveViewStudioWeb, :live_view
 
-  alias LiveViewStudioWeb.{ModalComponent, CreaturesComponent}
+  alias LiveViewStudioWeb.CreaturesComponent
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :show_modal, false)}
+    {:ok, socket}
   end
 
   def render(assigns) do
     ~L"""
     <h1>Earth Is Super Watery</h1>
     <div id="underwater">
-      <button phx-click="toggle-modal">
-        🤿 Look Underwater 👀
-      </button>
+      <%= live_patch "🤿 Look Underwater 👀",
+         to: Routes.underwater_path(@socket, :show_modal),
+         class: "button" %>
 
-      <%= if @show_modal do %>
-        <%= live_component ModalComponent, component: CreaturesComponent, id: :modal%>
+      <%= if @live_action == :show_modal do %>
+        <%= live_modal @socket,
+           CreaturesComponent,
+           return_to: Routes.live_path(@socket, __MODULE__),
+           title: "Sea Creatures" %>
       <% end %>
     </div>
     """
   end
 
-  def handle_event("toggle-modal", _, socket) do
-    {:noreply, update(socket, :show_modal, &(!&1))}
+  def handle_params(_params, _url, socket) do
+    {:noreply, socket}
   end
 end
