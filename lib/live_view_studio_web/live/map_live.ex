@@ -65,7 +65,11 @@ defmodule LiveViewStudioWeb.MapLive do
 
   def handle_event("marker-clicked", incident_id, socket) do
     incident = find_incident(socket, incident_id)
-    {:noreply, assign(socket, selected_incident: incident)}
+    {:reply, %{incident: incident}, assign(socket, selected_incident: incident)}
+  end
+
+  def handle_event("get-incidents", _, socket) do
+    {:reply, %{incidents: socket.assigns.incidents}, socket}
   end
 
   def handle_info({:incident_created, incident}, socket) do

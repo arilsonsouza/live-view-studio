@@ -2,7 +2,8 @@ import L from "leaflet";
 
 class IncidentMap {
   constructor(element, center, markerClickedCallback) {
-    const accessToken = "<mapbox_access_token>";
+    const accessToken =
+      "pk.eyJ1IjoiYXJpbHNvbnNvdXphIiwiYSI6ImNsY2F3amkzZDF5Y2czbnJrajUxNjZzeDYifQ.nudR1iqXy2KCnxqWztIthg";
     var mapboxTiles = L.tileLayer(
       "https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=" +
         accessToken,
